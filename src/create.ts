@@ -1,36 +1,52 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, UserRole } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const main = async () => {
-  //   const result = await prisma.post.create({
+  //   const createUser = await prisma.user.create({
   //     data: {
-  //       title: "This is title  ZNR",
-  //       content: "This is content ZNR",
-  //       authorName: "Fahim Ahammed Firoz ZNR",
+  //       username: "user2",
+  //       email: "user2@ph.com",
+  //       role: UserRole.user,
   //     },
   //   });
-  //   crete many
-    const createMany = await prisma.post.createMany({
-      data: [
-        {
-          title: "This is title  1",
-          content: "This is content 1",
-          authorName: "Fahim Ahammed Firoz 1",
-        },
-        {
-          title: "This is title  2",
-          content: "This is content 2",
-          authorName: "Fahim Ahammed Firoz 2",
-        },
-        {
-          title: "This is title  3",
-          content: "This is content 3",
-          authorName: "Fahim Ahammed Firoz 3",
-        },
-      ],
-    });
-    console.log(createMany);
+  //   console.log(createUser);
+  //   const createProfile = await prisma.profile.create({
+  //     data: {
+  //       bio: "this is bio",
+  //       userId: 1,
+  //     },
+  //   });
+  //   const createCategory = await prisma.category.create({
+  //     data: {
+  //       name: "mat",
+  //     },
+  //   });
+
+  const createPost = await prisma.post.create({
+    data: {
+      title: "this is title 5",
+      content: "this is content of the post. 5",
+      authorId: 2,
+      postCategory: {
+        create: [
+          {
+            categoryId: 1,
+          },
+          {
+            categoryId: 3,
+          },
+          {
+            categoryId: 4,
+          },
+        ],
+      },
+    },
+    // include: {
+    //   postCategory: true,
+    // },
+  });
+  console.log(createPost);
 };
 
 main();
