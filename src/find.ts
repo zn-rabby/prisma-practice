@@ -19,9 +19,18 @@ const main = async () => {
   //   });
 
   //   find unique
+  //   const findUnique = await prisma.post.findUnique({
+  //     where: {
+  //       id: 9,
+  //     },
+  //   });
   const findUnique = await prisma.post.findUnique({
     where: {
-      id: 2,
+      id: 9,
+    },
+    select: {
+      title: true,
+      content: true,
     },
   });
 
